@@ -1,8 +1,8 @@
+{{#with course}}
 <div class="container">
-    <h1 class="my-4">Title : JavaScript
+    <h1 class="my-4">Title : {{title}}
     </h1>
 
-    {{#with course}}
     <div class="row">
         <div class="col-md-8">
             <img class="img-fluid" src="{{imageUrl}}" alt="{{title}}" />
@@ -26,5 +26,5 @@
             {{/if}}
         </div>
     </div>
-    {{/with}}
 </div>
+{{/with}}
