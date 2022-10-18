@@ -46,18 +46,13 @@ authController.get('/login', (req, res) => {
 
 authController.post('/login', async (req, res) => {
     try {
-        if (req.body.username == '' || req.body.password == '') {
-            throw new Error('All fields are required');
-        }
         const token = await login(req.body.username, req.body.password);
         res.cookie('token', token);
         res.redirect('/');
     }
     catch (error) {
         const errors = parseError(error);
-        // TODO: Add error display to actual template from assignment
         res.render('login', {
-            title: 'Login page',
             errors,
             body: {
                 username: req.body.username
