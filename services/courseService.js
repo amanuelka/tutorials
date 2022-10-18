@@ -18,6 +18,10 @@ async function getById(id) {
     return Course.findById(id).lean();
 }
 
+async function getByIdNoLean(id) {
+    return Course.findById(id);
+}
+
 async function createCourse(course) {
     return Course.create(course);
 }
@@ -35,9 +39,24 @@ async function updateById(id, data) {
     return existing.save();
 }
 
+async function update(course, data) {
+    course.title = data.title;
+    course.description = data.description;
+    course.imageUrl = data.imageUrl;
+    course.duration = data.duration;
+    return course.save();
+}
+
 async function enrollUser(courseId, userId) {
     const course = await Course.findById(courseId);
     course.users.push(userId);
+    course.usersCount++;
+    return course.save();
+}
+
+async function enroll(course, userId) {
+    course.users.push(userId);
+    course.usersCount++;
     return course.save();
 }
 
@@ -45,8 +64,11 @@ module.exports = {
     getAllByDate,
     getRecent,
     getById,
+    getByIdNoLean,
     createCourse,
     deleteById,
     updateById,
-    enrollUser
+    update,
+    enrollUser,
+    enroll
 }
