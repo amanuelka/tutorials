@@ -1,8 +1,10 @@
-const { getById, getByIdNoLean } = require("../services/courseService")
+const { getById } = require('../services/courseService');
 
-module.exports = (lean) => async (req, res, next) => {
-    res.locals.course = lean
-        ? await getById(req.params.id)
-        : await getByIdNoLean(req.params.id);
-    next();
+function preload() {
+    return async function (req, res, next) {
+        res.locals.course = await getById(req.params.id);
+        next();
+    };
 }
+
+module.exports = preload;

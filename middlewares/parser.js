@@ -1,16 +1,14 @@
 function parseError(error) {
-    // mongoose validation
     if (error.name == 'ValidationError') {
+        // mongoose validation
         return Object.values(error.errors).map(v => v.message);
-    // express validation
     } else if (Array.isArray(error)) {
+        // express validation
         return error.map(x => x.msg);
-    // custom validation
     } else {
+        // custom validation
         return error.message.split('\n');
     }
 };
 
-module.exports = {
-    parseError
-};
+module.exports = { parseError };

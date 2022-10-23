@@ -7,4 +7,4 @@ module.exports = (...excludedKeys) => (req, res, next) => {
         }
     }
     next();
-}
+};

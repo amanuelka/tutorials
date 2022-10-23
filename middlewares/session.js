@@ -1,4 +1,4 @@
-const { verifyToken } = require("../services/userService");
+const { verifyToken } = require('../services/userService');
 
 module.exports = () => (req, res, next) => {
     const token = req.cookies.token;
@@ -14,4 +14,4 @@ module.exports = () => (req, res, next) => {
         }
     }
     next();
-}
+};

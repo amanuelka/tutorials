@@ -5,7 +5,7 @@ function hasUser() {
         } else {
             res.redirect('/auth/login');
         }
-    }
+    };
 }
 
 function isGuest() {
@@ -15,22 +15,18 @@ function isGuest() {
         } else {
             next();
         }
-    }
+    };
 }
 
 function isOwner() {
     return (req, res, next) => {
-        if (req.user && res.locals.course.owner.toString() == req.user._id.toString()) {
+        if (req.user && res.locals.course.owner == req.user._id) {
             res.locals.isOwner = true;
             next();
         } else {
             res.redirect('/auth/login');
         }
-    }
+    };
 }
 
-module.exports = {
-    hasUser,
-    isGuest,
-    isOwner
-}
+module.exports = { hasUser, isGuest, isOwner };
